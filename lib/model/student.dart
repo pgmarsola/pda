@@ -1,11 +1,9 @@
 class Student {
   String? nome;
   String? image;
-  int? idade;
   String? cpf;
   String? ra;
   String? dataNasc;
-  String? sexo;
   String? email;
   String? senha;
   String? cep;
@@ -16,34 +14,37 @@ class Student {
   String? estado;
   String? celular;
   int? curso;
+  String? situacao;
+  int? semestre;
+  String? unidade;
 
-  Student(
-      {this.nome,
-      this.image,
-      this.idade,
-      this.cpf,
-      this.ra,
-      this.dataNasc,
-      this.sexo,
-      this.email,
-      this.senha,
-      this.cep,
-      this.endereco,
-      this.numero,
-      this.bairro,
-      this.cidade,
-      this.estado,
-      this.celular,
-      this.curso});
+  Student({
+    this.nome,
+    this.image,
+    this.cpf,
+    this.ra,
+    this.dataNasc,
+    this.email,
+    this.senha,
+    this.cep,
+    this.endereco,
+    this.numero,
+    this.bairro,
+    this.cidade,
+    this.estado,
+    this.celular,
+    this.curso,
+    this.situacao,
+    this.semestre,
+    this.unidade,
+  });
 
   Student.fromJson(Map<String, dynamic> json) {
     nome = json['nome'];
     image = json['image'];
-    idade = json['idade'];
     cpf = json['cpf'];
     ra = json['ra'];
     dataNasc = json['dataNasc'];
-    sexo = json['sexo'];
     email = json['email'];
     senha = json['senha'];
     cep = json['cep'];
@@ -54,17 +55,18 @@ class Student {
     estado = json['estado'];
     celular = json['celular'];
     curso = json['curso'];
+    situacao = json['situacao'];
+    semestre = json['semestre'];
+    unidade = json['unidade'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['nome'] = this.nome;
     data['image'] = this.image;
-    data['idade'] = this.idade;
     data['cpf'] = this.cpf;
     data['ra'] = this.ra;
     data['dataNasc'] = this.dataNasc;
-    data['sexo'] = this.sexo;
     data['email'] = this.email;
     data['senha'] = this.senha;
     data['cep'] = this.cep;
@@ -75,6 +77,10 @@ class Student {
     data['estado'] = this.estado;
     data['celular'] = this.celular;
     data['curso'] = this.curso;
+    data['situacao'] = this.situacao;
+    data['semestre'] = this.semestre;
+    data['unidade'] = this.unidade;
+
     return data;
   }
 
@@ -82,11 +88,9 @@ class Student {
     return {
       'nome': nome,
       'image': image,
-      'idade': idade,
       'cpf': cpf,
       'ra': ra,
       'dataNasc': dataNasc,
-      'sexo': sexo,
       'email': email,
       'senha': senha,
       'cep': cep,
@@ -97,6 +101,9 @@ class Student {
       'estado': estado,
       'celular': celular,
       'curso': curso,
+      'situacao': situacao,
+      'semestre': semestre,
+      'unidade': unidade,
     };
   }
 }

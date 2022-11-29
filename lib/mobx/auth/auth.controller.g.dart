@@ -61,8 +61,8 @@ mixin _$AuthController on _AuthControllerBase, Store {
       AsyncAction('_AuthControllerBase.login', context: context);
 
   @override
-  Future login(String value, StudentController? controller) {
-    return _$loginAsyncAction.run(() => super.login(value, controller));
+  Future login(String ra, String senha, StudentController? controller) {
+    return _$loginAsyncAction.run(() => super.login(ra, senha, controller));
   }
 
   late final _$saveAsyncAction =

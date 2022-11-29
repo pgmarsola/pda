@@ -3,11 +3,9 @@ CREATE TABLE student
     id INTEGER PRIMARY KEY,
     nome TEXT,
     image TEXT,
-    idade INTEGER,
     cpf TEXT,
     ra TEXT,
     dataNasc TEXT,
-    sexo TEXT,
     email TEXT,
     senha TEXT,
     cep TEXT,
@@ -17,5 +15,8 @@ CREATE TABLE student
     cidade TEXT,
     estado TEXT,
     celular TEXT,
-    curso INTEGER
+    curso INTEGER,
+    situacao TEXT,
+    semestre INTEGER,
+    unidade TEXT
 )

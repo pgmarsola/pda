@@ -24,12 +24,13 @@ class StudentService {
           email: maps[i]['email'],
           endereco: maps[i]['endereco'],
           estado: maps[i]['estado'],
-          idade: maps[i]['idade'],
           numero: maps[i]['numero'],
           ra: maps[i]['ra'],
           senha: maps[i]['senha'],
-          sexo: maps[i]['sexo'],
           curso: maps[i]['curso'],
+          situacao: maps[i]['situacao'],
+          semestre: maps[i]['semestre'],
+          unidade: maps[i]['unidade'],
         );
       });
       return student;

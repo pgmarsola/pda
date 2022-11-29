@@ -25,13 +25,15 @@ abstract class _AuthControllerBase with Store {
 
   @action
   login(
-    String value,
+    String ra,
+    String senha,
     StudentController? controller,
   ) async {
     load = true;
 
     if (controller!.students!.isNotEmpty) {
-      var data = controller.students!.where((element) => element.ra == value);
+      var data = controller.students!
+          .where((element) => element.ra == ra && element.senha == senha);
       if (data.isNotEmpty) {
         await save(data);
         if (student != null) {
@@ -58,14 +60,15 @@ abstract class _AuthControllerBase with Store {
         email: contain.first.email ?? " ",
         endereco: contain.first.endereco ?? " ",
         estado: contain.first.estado ?? " ",
-        idade: contain.first.idade ?? 0,
         image: contain.first.image ?? " ",
         nome: contain.first.nome ?? " ",
         numero: contain.first.numero ?? 0,
         ra: contain.first.ra ?? " ",
         senha: contain.first.senha ?? " ",
-        sexo: contain.first.sexo ?? " ",
         curso: contain.first.curso ?? 0,
+        situacao: contain.first.situacao ?? " ",
+        semestre: contain.first.semestre ?? 0,
+        unidade: contain.first.unidade ?? " ",
       ));
       await getStudent();
     }

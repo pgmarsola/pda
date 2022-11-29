@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:pda/util/colors.dart';
 
@@ -37,6 +39,20 @@ class TopBar extends StatelessWidget implements PreferredSizeWidget {
         ],
       ),
       iconTheme: IconThemeData(color: $p_orange_dark),
+      actions: [
+        TextButton.icon(
+            onPressed: () {
+              exit(0);
+            },
+            icon: Icon(
+              Icons.exit_to_app,
+              color: $n_medium,
+            ),
+            label: Text(
+              "Sair",
+              style: TextStyle(color: $n_medium),
+            ))
+      ],
     );
   }
 }

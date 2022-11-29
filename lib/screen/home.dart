@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:pda/components/ibutton.dart';
+import 'package:pda/components/studentcard.dart';
 import 'package:pda/components/topbar.dart';
 import 'package:pda/util/colors.dart';
+import 'package:pda/util/responsive.dart';
 
 import '../model/student.dart';
 
@@ -16,25 +19,51 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: $n_light,
       appBar: TopBar(),
-      drawer: Drawer(
-        child: ListView(
+      body: SingleChildScrollView(
+          child: Container(
+        margin: EdgeInsets.all(responsive(context) * 2),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            ListTile(
-              onTap: () {},
-              title: Text(
-                "Sair".toUpperCase(),
-                style: TextStyle(color: $n_dark),
-              ),
-              trailing: Icon(Icons.exit_to_app),
-              iconColor: $p_orange_dark,
+            StudentCard(
+              student: widget.student,
+              complete: true,
+            ),
+            SizedBox(
+              height: responsive(context) * 2,
+            ),
+            IButton(
+              title: "Meu curso",
+              background: $b_basic1,
+              titleColor: $n_white,
+              icon: Icons.school,
+              press: () {},
+            ),
+            SizedBox(
+              height: responsive(context) * 2,
+            ),
+            IButton(
+              title: "Financeiro",
+              background: $p_green_dark,
+              titleColor: $n_white,
+              icon: Icons.attach_money_rounded,
+              press: () {},
+            ),
+            SizedBox(
+              height: responsive(context) * 2,
+            ),
+            IButton(
+              title: "Secretaria digital",
+              background: $p_orange_light,
+              titleColor: $n_white,
+              icon: Icons.desktop_mac_rounded,
+              press: () {},
             )
           ],
         ),
-      ),
-      body: Container(
-        child: Text(widget.student!.nome.toString()),
-      ),
+      )),
     );
   }
 }
