@@ -1,3 +1,6 @@
+import 'package:pda/model/curso.dart';
+import 'package:pda/model/endereco.dart';
+
 class Student {
   String? nome;
   String? image;
@@ -5,39 +8,20 @@ class Student {
   String? ra;
   String? dataNasc;
   String? email;
-  String? senha;
-  String? cep;
-  String? endereco;
-  int? numero;
-  String? bairro;
-  String? cidade;
-  String? estado;
   String? celular;
-  int? curso;
-  String? situacao;
-  int? semestre;
-  String? unidade;
+  Endereco? endereco;
+  Curso? curso;
 
-  Student({
-    this.nome,
-    this.image,
-    this.cpf,
-    this.ra,
-    this.dataNasc,
-    this.email,
-    this.senha,
-    this.cep,
-    this.endereco,
-    this.numero,
-    this.bairro,
-    this.cidade,
-    this.estado,
-    this.celular,
-    this.curso,
-    this.situacao,
-    this.semestre,
-    this.unidade,
-  });
+  Student(
+      {this.nome,
+      this.image,
+      this.cpf,
+      this.ra,
+      this.dataNasc,
+      this.email,
+      this.celular,
+      this.endereco,
+      this.curso});
 
   Student.fromJson(Map<String, dynamic> json) {
     nome = json['nome'];
@@ -46,18 +30,11 @@ class Student {
     ra = json['ra'];
     dataNasc = json['dataNasc'];
     email = json['email'];
-    senha = json['senha'];
-    cep = json['cep'];
-    endereco = json['endereco'];
-    numero = json['numero'];
-    bairro = json['bairro'];
-    cidade = json['cidade'];
-    estado = json['estado'];
     celular = json['celular'];
-    curso = json['curso'];
-    situacao = json['situacao'];
-    semestre = json['semestre'];
-    unidade = json['unidade'];
+    endereco = json['endereco'] != null
+        ? new Endereco.fromJson(json['endereco'])
+        : null;
+    curso = json['curso'] != null ? new Curso.fromJson(json['curso']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -68,19 +45,13 @@ class Student {
     data['ra'] = this.ra;
     data['dataNasc'] = this.dataNasc;
     data['email'] = this.email;
-    data['senha'] = this.senha;
-    data['cep'] = this.cep;
-    data['endereco'] = this.endereco;
-    data['numero'] = this.numero;
-    data['bairro'] = this.bairro;
-    data['cidade'] = this.cidade;
-    data['estado'] = this.estado;
     data['celular'] = this.celular;
-    data['curso'] = this.curso;
-    data['situacao'] = this.situacao;
-    data['semestre'] = this.semestre;
-    data['unidade'] = this.unidade;
-
+    if (this.endereco != null) {
+      data['endereco'] = this.endereco!.toJson();
+    }
+    if (this.curso != null) {
+      data['curso'] = this.curso!.toJson();
+    }
     return data;
   }
 
@@ -92,18 +63,7 @@ class Student {
       'ra': ra,
       'dataNasc': dataNasc,
       'email': email,
-      'senha': senha,
-      'cep': cep,
-      'endereco': endereco,
-      'numero': numero,
-      'bairro': bairro,
-      'cidade': cidade,
-      'estado': estado,
       'celular': celular,
-      'curso': curso,
-      'situacao': situacao,
-      'semestre': semestre,
-      'unidade': unidade,
     };
   }
 }

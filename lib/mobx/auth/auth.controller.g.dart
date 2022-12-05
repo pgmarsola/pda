@@ -9,35 +9,19 @@ part of 'auth.controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$AuthController on _AuthControllerBase, Store {
-  late final _$studentAtom =
-      Atom(name: '_AuthControllerBase.student', context: context);
+  late final _$userAtom =
+      Atom(name: '_AuthControllerBase.user', context: context);
 
   @override
-  Student? get student {
-    _$studentAtom.reportRead();
-    return super.student;
+  UserCredential? get user {
+    _$userAtom.reportRead();
+    return super.user;
   }
 
   @override
-  set student(Student? value) {
-    _$studentAtom.reportWrite(value, super.student, () {
-      super.student = value;
-    });
-  }
-
-  late final _$studentsAtom =
-      Atom(name: '_AuthControllerBase.students', context: context);
-
-  @override
-  ObservableList<Student>? get students {
-    _$studentsAtom.reportRead();
-    return super.students;
-  }
-
-  @override
-  set students(ObservableList<Student>? value) {
-    _$studentsAtom.reportWrite(value, super.students, () {
-      super.students = value;
+  set user(UserCredential? value) {
+    _$userAtom.reportWrite(value, super.user, () {
+      super.user = value;
     });
   }
 
@@ -61,31 +45,14 @@ mixin _$AuthController on _AuthControllerBase, Store {
       AsyncAction('_AuthControllerBase.login', context: context);
 
   @override
-  Future login(String ra, String senha, StudentController? controller) {
-    return _$loginAsyncAction.run(() => super.login(ra, senha, controller));
-  }
-
-  late final _$saveAsyncAction =
-      AsyncAction('_AuthControllerBase.save', context: context);
-
-  @override
-  Future save(Iterable<Student>? contain) {
-    return _$saveAsyncAction.run(() => super.save(contain));
-  }
-
-  late final _$getStudentAsyncAction =
-      AsyncAction('_AuthControllerBase.getStudent', context: context);
-
-  @override
-  Future getStudent() {
-    return _$getStudentAsyncAction.run(() => super.getStudent());
+  Future login(String email, String senha) {
+    return _$loginAsyncAction.run(() => super.login(email, senha));
   }
 
   @override
   String toString() {
     return '''
-student: ${student},
-students: ${students},
+user: ${user},
 load: ${load}
     ''';
   }

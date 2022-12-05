@@ -27,10 +27,10 @@ class _HomeState extends State<Home> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            StudentCard(
-              student: widget.student,
-              complete: true,
-            ),
+            // StudentCard(
+            //   student: widget.student,
+            //   complete: true,
+            // ),
             SizedBox(
               height: responsive(context) * 2,
             ),

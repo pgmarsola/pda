@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pda/components/button.dart';
 import 'package:pda/components/input.dart';
 import 'package:pda/components/logo.dart';
+import 'package:pda/helper/conectivity.state.dart';
 import 'package:pda/mobx/auth/auth.controller.dart';
 import 'package:pda/mobx/student/student.controller.dart';
 import 'package:pda/screen/home.dart';
@@ -20,7 +21,7 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  TextEditingController ra_controller = TextEditingController();
+  TextEditingController email_controller = TextEditingController();
   TextEditingController senha_controller = TextEditingController();
   AuthController? _authController;
   StudentController? _studentController;
@@ -38,32 +39,43 @@ class _LoginState extends State<Login> {
   _students() async {
     _studentController = StudentController();
     _authController = AuthController();
-    _studentController!.loadStudents();
   }
 
-  _handkeSignIn(String? ra, String? senha) async {
-    setState(() {
-      _load = true;
-    });
-
-    await _authController!.login(ra!, senha!, _studentController);
-
-    setState(() {
-      _load = false;
-    });
-
-    if (_authController!.student == null) {
+  _handkeSignIn(String? email, String? senha) async {
+    bool conect = await checkInternetConnection();
+    if (conect == false) {
       const snackBar = SnackBar(
           backgroundColor: Colors.red,
-          content: Text("Erro ao tentar fazer login"));
+          content: Text("Você está sem conexão com a internet"));
 
+      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     } else {
-      Nav.pushReplacement(
-          context,
-          Home(
-            student: _authController!.student,
-          ));
+      setState(() {
+        _load = true;
+      });
+
+      await _authController!.login(email!, senha!);
+
+      setState(() {
+        _load = false;
+      });
+
+      if (_authController!.user!.user!.uid == null) {
+        const snackBar = SnackBar(
+            backgroundColor: Colors.red,
+            content: Text("Erro ao tentar fazer login"));
+
+        // ignore: use_build_context_synchronously
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      } else {
+        // ignore: use_build_context_synchronously
+        Nav.pushReplacement(
+            context,
+            Home(
+              student: _studentController!.student,
+            ));
+      }
     }
   }
 
@@ -85,10 +97,10 @@ class _LoginState extends State<Login> {
                   height: responsive(context) * 2,
                 ),
                 Input(
-                  controller: ra_controller,
+                  controller: email_controller,
                   formatter: true,
                   password: false,
-                  labelText: "RA",
+                  labelText: "Usuário",
                 ),
                 SizedBox(
                   height: responsive(context) * 2,
@@ -120,7 +132,8 @@ class _LoginState extends State<Login> {
                             fit: FlexFit.tight,
                             child: Button(
                                 press: () async {
-                                  _handkeSignIn(ra_controller.text,
+                                  _handkeSignIn(
+                                      email_controller.text + "@student.com.br",
                                       senha_controller.text);
                                 },
                                 primary: true,

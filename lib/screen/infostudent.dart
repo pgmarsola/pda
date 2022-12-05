@@ -16,14 +16,14 @@ class InfoStudent extends StatefulWidget {
 }
 
 class _InfoStudentState extends State<InfoStudent> {
-  String? endereco(Student? value) {
-    var concatened = (value!.endereco.toString() +
-        " ${value.numero}" +
-        ", ${value.bairro}" +
-        " - ${value.cidade}/${value.estado} - ${value.cep}");
+  // String? endereco(Student? value) {
+  //   var concatened = (value!.endereco.toString() +
+  //       " ${value.numero}" +
+  //       ", ${value.bairro}" +
+  //       " - ${value.cidade}/${value.estado} - ${value.cep}");
 
-    return concatened;
-  }
+  //   return concatened;
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -74,10 +74,10 @@ class _InfoStudentState extends State<InfoStudent> {
                               subtitle: widget.student!.email,
                             ),
                             Divider(height: responsive(context) * 4),
-                            InfoTitle(
-                              title: "Endereço:",
-                              subtitle: endereco(widget.student),
-                            ),
+                            // InfoTitle(
+                            //   title: "Endereço:",
+                            //   subtitle: endereco(widget.student),
+                            // ),
                             SizedBox(
                               height: responsive(context) * 2,
                             ),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pda/screen/login.dart';
-import 'package:pda/util/colors.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 

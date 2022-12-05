@@ -15,22 +15,13 @@ class StudentService {
         return Student(
           nome: maps[i]['nome'],
           image: maps[i]['image'],
-          bairro: maps[i]['bairro'],
           celular: maps[i]['celular'],
-          cep: maps[i]['cep'],
-          cidade: maps[i]['cidade'],
           cpf: maps[i]['cpf'],
           dataNasc: maps[i]['dataNasc'],
           email: maps[i]['email'],
           endereco: maps[i]['endereco'],
-          estado: maps[i]['estado'],
-          numero: maps[i]['numero'],
           ra: maps[i]['ra'],
-          senha: maps[i]['senha'],
           curso: maps[i]['curso'],
-          situacao: maps[i]['situacao'],
-          semestre: maps[i]['semestre'],
-          unidade: maps[i]['unidade'],
         );
       });
       return student;

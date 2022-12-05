@@ -34,7 +34,7 @@ class _InputState extends State<Input> {
         controller: widget.controller,
         obscureText: widget.password! ? !visible : false,
         keyboardType:
-            widget.formatter! ? TextInputType.number : TextInputType.text,
+            widget.formatter! ? TextInputType.emailAddress : TextInputType.text,
         textAlign: TextAlign.left,
         style: TextStyle(color: $n_dark, fontSize: 16),
         decoration: InputDecoration(

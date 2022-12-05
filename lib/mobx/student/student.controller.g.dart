@@ -41,6 +41,38 @@ mixin _$StudentController on _StudentControllerBase, Store {
     });
   }
 
+  late final _$enderecosAtom =
+      Atom(name: '_StudentControllerBase.enderecos', context: context);
+
+  @override
+  ObservableList<Endereco>? get enderecos {
+    _$enderecosAtom.reportRead();
+    return super.enderecos;
+  }
+
+  @override
+  set enderecos(ObservableList<Endereco>? value) {
+    _$enderecosAtom.reportWrite(value, super.enderecos, () {
+      super.enderecos = value;
+    });
+  }
+
+  late final _$cursosAtom =
+      Atom(name: '_StudentControllerBase.cursos', context: context);
+
+  @override
+  ObservableList<Curso>? get cursos {
+    _$cursosAtom.reportRead();
+    return super.cursos;
+  }
+
+  @override
+  set cursos(ObservableList<Curso>? value) {
+    _$cursosAtom.reportWrite(value, super.cursos, () {
+      super.cursos = value;
+    });
+  }
+
   late final _$loadAtom =
       Atom(name: '_StudentControllerBase.load', context: context);
 
@@ -57,12 +89,28 @@ mixin _$StudentController on _StudentControllerBase, Store {
     });
   }
 
-  late final _$loadStudentsAsyncAction =
-      AsyncAction('_StudentControllerBase.loadStudents', context: context);
+  late final _$loadStudentAsyncAction =
+      AsyncAction('_StudentControllerBase.loadStudent', context: context);
 
   @override
-  Future loadStudents() {
-    return _$loadStudentsAsyncAction.run(() => super.loadStudents());
+  Future loadStudent(String uid) {
+    return _$loadStudentAsyncAction.run(() => super.loadStudent(uid));
+  }
+
+  late final _$saveAsyncAction =
+      AsyncAction('_StudentControllerBase.save', context: context);
+
+  @override
+  Future save(Student? contain) {
+    return _$saveAsyncAction.run(() => super.save(contain));
+  }
+
+  late final _$getInfoAsyncAction =
+      AsyncAction('_StudentControllerBase.getInfo', context: context);
+
+  @override
+  Future getInfo() {
+    return _$getInfoAsyncAction.run(() => super.getInfo());
   }
 
   @override
@@ -70,6 +118,8 @@ mixin _$StudentController on _StudentControllerBase, Store {
     return '''
 student: ${student},
 students: ${students},
+enderecos: ${enderecos},
+cursos: ${cursos},
 load: ${load}
     ''';
   }

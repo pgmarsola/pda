@@ -1,7 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mobx/mobx.dart';
-import 'package:pda/helper/service/student.service.dart';
+import 'package:pda/mobx/auth/auth.repository.dart';
+import 'package:pda/util/const.dart';
 
-import '../../model/student.dart';
 import '../student/student.controller.dart';
 
 part 'auth.controller.g.dart';
@@ -10,77 +11,31 @@ class AuthController = _AuthControllerBase with _$AuthController;
 
 abstract class _AuthControllerBase with Store {
   final StudentController? _studentController = StudentController();
-  final StudentService? _studentService = StudentService();
+  AuthRepository? _authRepository;
 
-  _AuthControllerBase() {}
+  _AuthControllerBase() {
+    _authRepository = AuthRepository();
+  }
 
   @observable
-  Student? student;
-
-  @observable
-  ObservableList<Student>? students;
+  UserCredential? user;
 
   @observable
   bool load = false;
 
   @action
   login(
-    String ra,
+    String email,
     String senha,
-    StudentController? controller,
   ) async {
     load = true;
 
-    if (controller!.students!.isNotEmpty) {
-      var data = controller.students!
-          .where((element) => element.ra == ra && element.senha == senha);
-      if (data.isNotEmpty) {
-        await save(data);
-        if (student != null) {
-          return student;
-        }
-      }
+    user = await _authRepository!.login(email, senha);
+
+    if (user!.user!.uid != null) {
+      StudentAccess.uid = user!.user!.uid;
+      await _studentController!.loadStudent(StudentAccess.uid!);
     }
     load = false;
-  }
-
-  @action
-  save(Iterable<Student>? contain) async {
-    load = true;
-
-    if (contain!.isNotEmpty) {
-      await _studentService!.delete();
-      await _studentService!.create(Student(
-        bairro: contain.first.bairro ?? " ",
-        celular: contain.first.celular ?? " ",
-        cep: contain.first.cep ?? " ",
-        cidade: contain.first.cidade ?? " ",
-        cpf: contain.first.cpf ?? " ",
-        dataNasc: contain.first.dataNasc ?? " ",
-        email: contain.first.email ?? " ",
-        endereco: contain.first.endereco ?? " ",
-        estado: contain.first.estado ?? " ",
-        image: contain.first.image ?? " ",
-        nome: contain.first.nome ?? " ",
-        numero: contain.first.numero ?? 0,
-        ra: contain.first.ra ?? " ",
-        senha: contain.first.senha ?? " ",
-        curso: contain.first.curso ?? 0,
-        situacao: contain.first.situacao ?? " ",
-        semestre: contain.first.semestre ?? 0,
-        unidade: contain.first.unidade ?? " ",
-      ));
-      await getStudent();
-    }
-    load = false;
-  }
-
-  @action
-  getStudent() async {
-    students = ObservableList<Student>.of(await _studentService!.all());
-
-    if (students!.isNotEmpty) {
-      student = students![0];
-    }
   }
 }
