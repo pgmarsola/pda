@@ -33,7 +33,7 @@ class _StudentCardState extends State<StudentCard> {
                   alignment: Alignment.center,
                   // ignore: sort_child_properties_last
                   child: Text(
-                    codeDate(widget.student!.curso).toString(),
+                    (widget.student!.curso!.nomeCurso).toString(),
                     style: TextStyle(
                         color: $n_white,
                         fontWeight: FontWeight.bold,
@@ -58,9 +58,8 @@ class _StudentCardState extends State<StudentCard> {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               CircleAvatar(
-                                backgroundImage: AssetImage(
-                                  widget.student!.image.toString(),
-                                ),
+                                backgroundImage: NetworkImage(
+                                    widget.student!.image.toString()),
                                 maxRadius: responsive(context) * 4,
                               )
                             ],
@@ -140,7 +139,7 @@ class _StudentCardState extends State<StudentCard> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     CircleAvatar(
-                      backgroundImage: AssetImage(
+                      backgroundImage: NetworkImage(
                         widget.student!.image.toString(),
                       ),
                       maxRadius: responsive(context) * 4,

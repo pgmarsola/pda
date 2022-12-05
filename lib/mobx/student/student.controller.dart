@@ -82,6 +82,7 @@ abstract class _StudentControllerBase with Store {
       ));
 
       await getInfo();
+      return student;
     }
     load = false;
   }

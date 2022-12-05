@@ -33,12 +33,6 @@ class _LoginState extends State<Login> {
     super.initState();
     _authController = AuthController();
     _studentController = StudentController();
-    _students();
-  }
-
-  _students() async {
-    _studentController = StudentController();
-    _authController = AuthController();
   }
 
   _handkeSignIn(String? email, String? senha) async {
@@ -69,6 +63,7 @@ class _LoginState extends State<Login> {
         // ignore: use_build_context_synchronously
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
       } else {
+        await _studentController!.getInfo();
         // ignore: use_build_context_synchronously
         Nav.pushReplacement(
             context,
